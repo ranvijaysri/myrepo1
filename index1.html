@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranvijay's Restaurant</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <style>
+    body { font-family: Arial; margin: 0; }
+    header { background: #333; color: white; padding: 15px; text-align: center; }
+    section { padding: 20px; }
+    form { max-width: 400px; margin: auto; }
+    input, button { width: 100%; padding: 10px; margin: 10px 0; }
+    button { background: #333; color: white; border: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ranvijay's Restaurant</h1>
+  <p>Book Your Table Online</p>
+</header>
+
+<section>
+  <h2>Table Booking</h2>
+  <form id="bookingForm">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <input type="date" name="date" required>
+    <input type="time" name="time" required>
+    <button type="submit">Book Table</button>
+  </form>
+</section>
+
+<script>
+  (function(){
+    emailjs.init("4dAxG8UuQrMZEEgq1");
+  })();
+
+  document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.send("service_pmrgxnl", "template_xb41m0i", {
+      name: this.name.value,
+      email: this.email.value,
+      phone: this.phone.value,
+      date: this.date.value,
+      time: this.time.value,
+      to_email: "Ranvijay0201@outlook.com"
+    })
+    .then(function() {
+      alert("Booking Successful! Confirmation sent.");
+    }, function(error) {
+      alert("Failed: " + JSON.stringify(error));
+    });
+  });
+</script>
+
+</body>
+</html>
